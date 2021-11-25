@@ -1,0 +1,44 @@
+body {
+    font-family: Roboto;
+    background-color: #E5E5E5;  
+}
+
+nav  {
+    width: 100%;
+    height: 89px;
+    background-color: #404EED;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: fixed;
+    top:0;
+    left: 0;
+
+}
+
+nav img {
+  padding-top: 10px;
+  padding-left: 80.04px;
+
+}
+
+main {
+    width: 100%;
+    height: 785px;
+
+    display: flex;
+}
+
+section {
+    width: 50%;
+    height: 785px;
+    background-color: red;
+}
+
+aside {
+    width: 50%;
+    height: 785px;
+    background-color: #404EED;
+}
