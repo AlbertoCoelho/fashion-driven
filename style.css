@@ -10,13 +10,15 @@ nav  {
     
     display: flex;
     align-items: center;
-    justify-content: center;
     
+    /* 
     position: fixed;
     top:0;
     left: 0;
-
+    */
 }
+
+
 
 nav img {
   padding-top: 10px;
@@ -35,10 +37,20 @@ section {
     width: 50%;
     height: 785px;
     background-color: red;
+
+    padding-top: 4.88%;
+    padding-bottom: 5,01%;
+
 }
 
 aside {
     width: 50%;
     height: 785px;
     background-color: #404EED;
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+
 }
+
