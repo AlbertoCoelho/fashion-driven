@@ -3,7 +3,7 @@ body {
     background-color: #E5E5E5;  
 }
 
-nav  {
+header  {
     width: 100%;
     height: 89px;
     background-color: #404EED;
@@ -20,7 +20,7 @@ nav  {
 
 
 
-nav img {
+header img {
   padding-top: 10px;
   padding-left: 80.04px;
 
@@ -36,7 +36,7 @@ main {
 section {
     width: 50%;
     height: 785px;
-    background-color: coral;
+    background-color: #F2F2F2;
 
     padding-top: 4.88%;
     padding-bottom: 5,01%;
@@ -82,7 +82,7 @@ aside img {
 .opcao {
     width: 100%;
     height: 30%;
-    background-color: darkseagreen;
+    background-color: #F2F2F2;;
 
     font-family: Roboto;
     font-style: normal;
@@ -91,7 +91,7 @@ aside img {
     line-height: 21px;
 }
 
-main section .caixa-de-escolhas .opcao .bloco-tipos-modelo.selecionado {
+main section .caixa-de-escolhas .opcao .bloco-tipos-modelo .tipos-modelo .imagem-section.selecionado {
     border: 3px solid #404EED;
     box-sizing: border-box;
 }
@@ -115,12 +115,16 @@ main section .caixa-de-escolhas .opcao .bloco-tipos-modelo.selecionado {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border: 0.5px solid #C4C4C4;
+    border-radius: 50%;
     
 }
 
 .bloco-tipos-modelo{
   display: flex;
   justify-content: space-between;
+
 }
 
 .tipos-modelo {
@@ -128,6 +132,7 @@ main section .caixa-de-escolhas .opcao .bloco-tipos-modelo.selecionado {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .frase-imagem{
@@ -135,24 +140,39 @@ main section .caixa-de-escolhas .opcao .bloco-tipos-modelo.selecionado {
     display: flex;
     flex-direction: column;
 
-    margin-bottom: 9.27px;
+    margin-bottom: 3.27px;
 }
 
-.input {
-    width: 59.10%;
-    height: 16px;
+input {
+    width: 100%;
+    height: 40px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 23.76px;
+    margin-bottom: 33.76px;
+
+    outline: none;
 }
 
 .confirmacao {
     padding-right: 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 10.50px;
 }
 
 .confirmar {
     width: 400px;
     height: 40px;
+
+    background: #C4C4C4;
+    border-radius: 10px;
+    border: none;
+
+}
+
+.confirmar:disabled {
+    background-color: gray;
+
 }
 
 footer {
@@ -163,7 +183,7 @@ footer {
 .frase-footer {
     width: 100%;
     height: 17.13%;
-    background-color: cornflowerblue;
+    background-color: #F2F2F2;
 
     display: flex;
     align-items: center;
@@ -174,7 +194,7 @@ footer {
 .imagem-autor-pedido  {
     width: 100%;
     height: 82.87%;
-    background-color: darkkhaki;
+    background-color: #F2F2F2;
 
     padding-left: 8.69%;
     padding-right: 12.67%;
@@ -191,4 +211,10 @@ footer {
 
     width: 14.77%;
     height: 83.56%;
+
+    background-color: #FFFFFF;
+}
+
+.ativo {
+    background-color: #404EED;
 }

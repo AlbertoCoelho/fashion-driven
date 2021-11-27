@@ -16,119 +16,110 @@
 </head>
 <body>
 
-    <nav>
+    <header>
        <img src="FashionDriven/Logo.png" />
-    </nav>
+    </header>
 
     <main>
         <section>
             <div class="caixa-de-escolhas">
-                <div class="opcao">
-                    <div class="frase-section">
-                        Escolha o modelo
-                    </div>
+                <div class="opcao modelo">
+                    <h2 class="frase-section">Escolha o modelo</h2>
 
-                    <div class="bloco-tipos-modelo">
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                    <ul class="bloco-tipos-modelo">
+                        <li class="tipos-modelo">
+                        <div class="imagem-section"  onclick="selecionarModelo(this)">
                                 <img src="FashionDriven/tshirt.png" />
                             </div>
                             <p class="frase-section"> T-shirt</p>
-                        </div>
+                        </li>
 
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section"  onclick="selecionarModelo(this)">
                                 <img src="FashionDriven/Camiseta.png" />
                             </div>
                             <p class="frase-section"> Camiseta</p>
-                        </div>
+                        </li>
 
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section"  onclick="selecionarModelo(this)">
                                 <img src="FashionDriven/Mangalonga.png" />
                             </div>
                             <p class="frase-section"> Manga longa</p>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
 
                 </div>
 
-                <div class="opcao">
+                <div class="opcao gola">
+                    <h2 class="frase-section">Escolha a gola</h2>
 
-                    <div class="frase-section">
-                        Escolha a gola
-                    </div>
-
-                    <div class="bloco-tipos-modelo">
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                    <ul class="bloco-tipos-modelo">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section" onclick="selecionarGola(this)">
                                 <img src="FashionDriven/GolaV.png" />
                             </div>
                             <p class="frase-section"> Gola V</p>
-                        </div>
+                        </li>
 
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section" onclick="selecionarGola(this)">
                                 <img src="FashionDriven/GolaRedonda.png" />
                             </div>
                             <p class="frase-section"> Gola Redonda</p>
-                        </div>
+                        </li>
 
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section" onclick="selecionarGola(this)">
                                 <img src="FashionDriven/GolaPolo.png" />
                             </div>
                             <p class="frase-section">Gola polo</p>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
 
                 </div>
 
-                <div class="opcao">
-                    <div class="frase-section">
-                        Escolha o tecido
-                    </div>
+                <div class="opcao tecido">
+                    <h2 class="frase-section">Escolha o tecido</h2>
 
-                    <div class="bloco-tipos-modelo">
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                    <ul class="bloco-tipos-modelo">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section" onclick="selecionarTecido(this)">
                                 <img src="FashionDriven/Seda.png" />
                             </div>
                             <p class="frase-section"> Seda</p>
-                        </div>
+                        </li>
 
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section" onclick="selecionarTecido(this)">
                                 <img src="FashionDriven/Algodão.png" />
                             </div>
                             <p class="frase-section"> Algodão</p>
-                        </div>
+                        </li>
 
-                        <div class="tipos-modelo">
-                            <div class="imagem-section">
+                        <li class="tipos-modelo">
+                            <div class="imagem-section" onclick="selecionarTecido(this)">
                                 <img src="FashionDriven/Poliester.png" />
                             </div>
                             <p class="frase-section"> Poliéster</p>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
 
                 </div>
                 
 
             </div>
 
-           <div class="confirmacao">
+            <div class="confirmacao">
                 <div class="frase-imagem">
                     <p class="frase-section"> Imagem de referência</p>
                 </div>
                 
-                <div class="input">
-                    <input placeholder="Insira o link" />
-                </div>
+                <input placeholder="Insira o link" />
                 
-                <button class="confirmar">Confirmar pedido</button>
+                <button id="Button" class="confirmar frase-section" disabled>Confirmar pedido</button>
 
-           </div>
+            </div>
           
         </section>
 
