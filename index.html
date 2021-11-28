@@ -28,7 +28,7 @@
 
                     <ul class="bloco-tipos-modelo">
                         <li class="tipos-modelo">
-                        <div class="imagem-section"  onclick="selecionarModelo(this)">
+                            <div class="imagem-section" onclick="selecionarModelo(this)">
                                 <img src="FashionDriven/tshirt.png" />
                             </div>
                             <p class="frase-section"> T-shirt</p>
@@ -115,10 +115,10 @@
                     <p class="frase-section"> Imagem de referência</p>
                 </div>
            
-                <input class="input" placeholder="Insira o link" oninput="inputComString()" />
+                <input class="input" id='meuinput' placeholder="Insira o link" oninput="inputComString()" />
               
                 
-                <button id="Button" class="confirmar frase-section" disabled onclick="confirmarPedido(this)">Confirmar pedido</button>
+                <button id="Button" class="confirmar frase-section" disabled onclick="enviarPedido(this)">Confirmar pedido</button>
 
             </div>
           
@@ -135,24 +135,23 @@
             <span class="frase-section">Ultimos pedidos</span>
         </div>
 
-        <div class="imagem-autor-pedido">
-            <div class="pedido">
+        <ul class="imagem-autor-pedido">
+            <li class="pedido">
                 <img src="FashionDriven/Blusa4.png" />
                 <span>Criador: Trololo</span>
-            </div>
+            </li>
 
-            <div class="pedido">
+            <li class="pedido">
                 <img src="FashionDriven/Blusa4.png" />
                 <span>Criador: Trololo</span>
-            </div>
+            </li>
             
-        </div>
+        </ul>
     </footer>
 
     
 
 
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </body>

@@ -200,6 +200,7 @@ footer {
     padding-right: 12.67%;
 
     display: flex;
+    flex-wrap: wrap;
     gap: 1.20%;
 }
 
@@ -209,12 +210,26 @@ footer {
     justify-content: center;
     align-items: center;
 
-    width: 14.77%;
-    height: 83.56%;
+    width: 201,69px;
+    height: 236,47px;
 
     background-color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.pedido img {
+    width: 180px;
+    height: 180px;
+}
+
+.pedido span {
+    padding-top: 10px;;
 }
 
 .ativo {
     background-color: #404EED;
+}
+
+.criador {
+    word-break: break-all;
 }
