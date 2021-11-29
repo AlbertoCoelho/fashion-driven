@@ -3,7 +3,7 @@ function dadosDoPedido(dados,valorid){
 
     promise.then((resposta) => {
         window.confirm("Deseja encomendar esse modelo existente?");   
-        const pedidos = resposta.data.id;
+        const pedidos = resposta.data;
 
         function meuiD(id){
             if(id === valorid){
@@ -11,7 +11,8 @@ function dadosDoPedido(dados,valorid){
             }
         }
 
-        const meuPedido = pedidos.filter(meuiD);
+        const meuPedido = pedidos.id.filter(meuiD);
+        console.log(meuPedido);
         const ulPedidos = document.querySelector(".imagem-autor-pedido");
         
         delete meuPedido.id;
@@ -37,15 +38,12 @@ function dadosDoPedido(dados,valorid){
 
 
 function dadosDoPedido(dados,valorid){
-    console.log(dados);
-    console.log(valorid);
+
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/shirts-api/shirts");
 
-    
-    function encomendarModeloExistente(resposta){   
+    promise.then((resposta) => {
         window.confirm("Deseja encomendar esse modelo existente?");   
         const pedidos = resposta.data;
-        console.log(pedidos);
         const ulPedidos = document.querySelector(".imagem-autor-pedido");
         
       for(let i=0;i<pedidos.length;i++){
@@ -53,7 +51,6 @@ function dadosDoPedido(dados,valorid){
               delete pedidos[i].id;
               pedidos[i].author = dizerNome;
               pedidos[i].owner = dizerNome;
-              console.log(pedidos[i]);
            
               const enviandoPedido = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", pedidos[i]);
 
@@ -69,10 +66,7 @@ function dadosDoPedido(dados,valorid){
             break;
           }
       }
-        
-    }
-
-    promise.then(encomendarModeloExistente);
+    });
     promise.catch((erro) => console.log("Está dando erro"));
 }
 
