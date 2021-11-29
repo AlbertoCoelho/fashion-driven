@@ -12,7 +12,6 @@ function  selecionarModelo(elemento, nomeModelo){
         selecionado.classList.remove("selecionado");
     } else {
         contadorItems++;
-        console.log(contadorItems);
     }
 
     modelo = nomeModelo;
@@ -30,7 +29,6 @@ function selecionarGola(elemento,nomeGola){
         selecionado.classList.remove("selecionado");
     } else {
         contadorItems++;
-        console.log(contadorItems);
     }
 
     gola = nomeGola;
@@ -48,7 +46,6 @@ function selecionarTecido(elemento,nomeTecido){
         selecionado.classList.remove("selecionado");
     } else {
         contadorItems++;
-        console.log(contadorItems);
     }
 
     tecido = nomeTecido;
@@ -113,40 +110,13 @@ function inputComString(){
         contadorItems--;
     }
 
-    console.log(contadorItems);
     verificarPedido();
 }
 inputComString();
 
-
-function pedidoSucesso(resposta){
-    window.alert("Encomenda feita!");
-    const ulPedidos = document.querySelector(".imagem-autor-pedido");
-    const pedido = resposta.data;
-    ulPedidos.innerHTML += 
-    `
-    <li class="pedido" onclick="dadosDoPedido(this,${pedido.id})">
-        <img src="${pedido.image}" />
-        <span class="criador" >Criador: ${pedido.owner}</span>
-    </li>
-    `
-    
-    const input = document.querySelector(".input");
-    input.value = '';  
-
-    carregarPedidos();
-
-}
-
-function pedidoFalhou(){
-    console.log("Deu erro na sua encomenda!");
-}
-
-
 function enviarPedido(){
     let input = document.getElementById("meuinput");
     let link = input.value;
-    console.log(link);
 
     const pedido = {
         model: modelo,
@@ -156,24 +126,36 @@ function enviarPedido(){
         image: link,
         author: dizerNome
     };
-    console.log(pedido);
 
     const enviandoPedido = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", pedido);
 
-    enviandoPedido.then(pedidoSucesso);
-    enviandoPedido.catch(pedidoFalhou);
+    enviandoPedido.then((resposta) => {
+        window.alert("Encomenda feita!");
+        const ulPedidos = document.querySelector(".imagem-autor-pedido");
+        const pedido = resposta.data;
+        ulPedidos.innerHTML += 
+        `
+        <li class="pedido" onclick="dadosDoPedido(this,${pedido.id})">
+            <img src="${pedido.image}" />
+            <span class="criador" >Criador: ${pedido.owner}</span>
+        </li>
+        `
+        
+        const input = document.querySelector(".input");
+        input.value = '';  
+
+        carregarPedidos();
+    });
+    enviandoPedido.catch(() =>  console.log("Deu erro na sua encomenda!"));
 }
 
 function dadosDoPedido(dados,valorid){
-    console.log(dados);
-    console.log(valorid);
+
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/shirts-api/shirts");
 
-    
-    function encomendarModeloExistente(resposta){   
+    promise.then((resposta) => {
         window.confirm("Deseja encomendar esse modelo existente?");   
         const pedidos = resposta.data;
-        console.log(pedidos);
         const ulPedidos = document.querySelector(".imagem-autor-pedido");
         
       for(let i=0;i<pedidos.length;i++){
@@ -181,7 +163,6 @@ function dadosDoPedido(dados,valorid){
               delete pedidos[i].id;
               pedidos[i].author = dizerNome;
               pedidos[i].owner = dizerNome;
-              console.log(pedidos[i]);
            
               const enviandoPedido = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", pedidos[i]);
 
@@ -194,12 +175,8 @@ function dadosDoPedido(dados,valorid){
             `
             
             enviandoPedido.then(carregarPedidos);
-            break;
           }
       }
-        
-    }
-
-    promise.then(encomendarModeloExistente);
+    });
     promise.catch((erro) => console.log("Está dando erro"));
 }
