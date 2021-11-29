@@ -155,10 +155,8 @@ function dadosDoPedido(dados,valorid){
     promise.then((resposta) => {
         window.confirm("Deseja encomendar esse modelo existente?");   
         const pedidos = resposta.data;
-        console.log(pedidos);
 
         const meuPedido = pedidos.find( element => element.id === valorid);
-        console.log(meuPedido);
         const ulPedidos = document.querySelector(".imagem-autor-pedido");
         
         delete meuPedido.id;
