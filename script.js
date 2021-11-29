@@ -1,9 +1,11 @@
 let contadorItems = 0;
 const dizerNome = prompt("Qual o seu nome?");
+let modelo;
+let gola;
+let tecido;
 let pedidos = [];
 
-function  selecionarModelo(elemento){
-    console.log(elemento);
+function  selecionarModelo(elemento, nomeModelo){
     const selecionado = document.querySelector(".modelo .selecionado");
 
     if (selecionado !== null) {
@@ -13,13 +15,15 @@ function  selecionarModelo(elemento){
         console.log(contadorItems);
     }
 
+    modelo = nomeModelo;
+
     elemento.classList.add("selecionado");
 
     verificarPedido();
 
 }
 
-function selecionarGola(elemento){
+function selecionarGola(elemento,nomeGola){
     const selecionado = document.querySelector(".gola .selecionado");
 
     if (selecionado !== null) {
@@ -29,13 +33,15 @@ function selecionarGola(elemento){
         console.log(contadorItems);
     }
 
+    gola = nomeGola;
+
     elemento.classList.add("selecionado");
 
     verificarPedido();
 
 }
 
-function selecionarTecido(elemento){
+function selecionarTecido(elemento,nomeTecido){
     const selecionado = document.querySelector(".tecido .selecionado");
 
     if (selecionado !== null) {
@@ -44,6 +50,8 @@ function selecionarTecido(elemento){
         contadorItems++;
         console.log(contadorItems);
     }
+
+    tecido = nomeTecido;
 
     elemento.classList.add("selecionado");
 
@@ -66,7 +74,7 @@ function carregarPedidos(){
 
     
     function carregandoPedido(resposta){
-        console.log(resposta.data);
+        
         pedidos = resposta.data;
 
         const ulPedidos = document.querySelector(".imagem-autor-pedido");
@@ -78,12 +86,13 @@ function carregarPedidos(){
 
             ulPedidos.innerHTML += 
             `
-            <li class="pedido">
+            <li class="pedido" onclick="dadosDoPedido(this,${pedido.id})">
                 <img src="${pedido.image}" />
                 <span class="criador" >Criador: ${pedido.owner}</span>
             </li>
             `
-        }              
+        }       
+    
     }
     
     function pedidoNegado(resposta){
@@ -122,7 +131,7 @@ function pedidoSucesso(resposta){
     const pedido = resposta.data;
     ulPedidos.innerHTML += 
     `
-    <li class="pedido">
+    <li class="pedido" onclick="dadosDoPedido(this,${pedido.id})">
         <img src="${pedido.image}" />
         <span class="criador" >Criador: ${pedido.owner}</span>
     </li>
@@ -146,9 +155,9 @@ function enviarPedido(){
     console.log(link);
 
     const pedido = {
-        model: "t-shirt",
-	    neck: "v-neck",
-	    material: "silk",
+        model: modelo,
+	    neck: gola,
+	    material: tecido,
         owner: dizerNome,  
         image: link,
         author: dizerNome
@@ -175,3 +184,48 @@ function verificarURL(){
     }
 }
 */
+
+function dadosDoPedido(dados,valorid){
+    console.log(dados);
+    console.log(valorid);
+    const promise = axios.get("https://mock-api.driven.com.br/api/v4/shirts-api/shirts");
+
+    
+    function encomendarModeloExistente(resposta){   
+        window.confirm("Deseja encomendar esse modelo existente?");   
+        const pedidos = resposta.data;
+        console.log(pedidos);
+      
+      for(let i=0;i<pedidos.length;i++){
+          if(pedidos[i].id === valorid){
+              console.log(pedidos[i]);
+              const ulPedidos = document.querySelector(".imagem-autor-pedido");
+              ulPedidos.innerHTML += 
+            `
+            <li class="pedido" onclick="dadosDoPedido(this,${pedidos[i].id})">
+                <img src="${pedidos[i].image}" />
+                <span class="criador" >Criador: ${pedidos[i].owner}</span>
+            </li>
+            `
+
+          }
+      }
+        
+    }
+    recarregarPagina();
+
+    /*
+    const ulPedidos = document.querySelector(".imagem-autor-pedido");
+    ulPedidos.innerHTML += 
+            `
+            <li class="pedido" onclick="dadosDoPedido(this,${pedido.id})">
+                <img src="${pedido.image}" />
+                <span class="criador" >Criador: ${pedido.owner}</span>
+            </li>
+            `
+
+    */
+
+    promise.then(encomendarModeloExistente);
+    promise.catch((erro) => console.log("Está dando erro"));
+}
