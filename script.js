@@ -64,17 +64,18 @@ function verificarPedido() {
     const botao = document.getElementById("Button");
     if (contadorItems === 4) {
         botao.disabled = false;
-        botao.classList.add("ativo");
         botao.style.cursor = 'pointer';
+    }
+    else{
+        botao.setAttribute('disabled','');
+        botao.style.cursor = 'default';
     }
 }
 
 function carregarPedidos(){
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/shirts-api/shirts");
-
+    const promise = axios.get("https://mock-api.driven.com.br/api/v4/shirts-api/shirts");    
     
-    function carregandoPedido(resposta){
-        
+    promise.then((resposta) => {
         pedidos = resposta.data;
 
         const ulPedidos = document.querySelector(".imagem-autor-pedido");
@@ -91,32 +92,25 @@ function carregarPedidos(){
                 <span class="criador" >Criador: ${pedido.owner}</span>
             </li>
             `
-        }       
-    
-    }
-    
-    function pedidoNegado(resposta){
-        alert("Ops, não conseguimos processar sua encomenda");
-    }
-    
-    promise.then(carregandoPedido);
-    promise.catch(pedidoNegado);
+        }
+    });
+    promise.catch(() =>  alert("Ops, não conseguimos processar sua encomenda"));
 }
 carregarPedidos();
 
 
 function inputComString(){
     const input = document.querySelector(".input");
+    if(contadorItems === 4 && input.value === ""){
+        contadorItems=3;
+    }
+
     if(input.value !== ""){
         contadorItems++;
     }
 
     if(contadorItems>4){
         contadorItems--;
-    }
-
-    if(contadorItems === 4 && input.value === ""){
-        contadorItems=3;
     }
 
     console.log(contadorItems);
@@ -140,7 +134,7 @@ function pedidoSucesso(resposta){
     const input = document.querySelector(".input");
     input.value = '';  
 
-    recarregarPagina();
+    carregarPedidos();
 
 }
 
@@ -170,21 +164,6 @@ function enviarPedido(){
     enviandoPedido.catch(pedidoFalhou);
 }
 
-function recarregarPagina(){
-    carregarPedidos();
-
-}
-
-/*
-function verificarURL(){
-    const input = document.querySelector('.input');
-
-    if(input.value === 'valid'){
-        contadorItems++;
-    }
-}
-*/
-
 function dadosDoPedido(dados,valorid){
     console.log(dados);
     console.log(valorid);
@@ -195,11 +174,17 @@ function dadosDoPedido(dados,valorid){
         window.confirm("Deseja encomendar esse modelo existente?");   
         const pedidos = resposta.data;
         console.log(pedidos);
-      
+        const ulPedidos = document.querySelector(".imagem-autor-pedido");
+        
       for(let i=0;i<pedidos.length;i++){
           if(pedidos[i].id === valorid){
+              delete pedidos[i].id;
+              pedidos[i].author = dizerNome;
+              pedidos[i].owner = dizerNome;
               console.log(pedidos[i]);
-              const ulPedidos = document.querySelector(".imagem-autor-pedido");
+           
+              const enviandoPedido = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", pedidos[i]);
+
               ulPedidos.innerHTML += 
             `
             <li class="pedido" onclick="dadosDoPedido(this,${pedidos[i].id})">
@@ -207,24 +192,13 @@ function dadosDoPedido(dados,valorid){
                 <span class="criador" >Criador: ${pedidos[i].owner}</span>
             </li>
             `
-
+            
+            enviandoPedido.then(carregarPedidos);
+            break;
           }
       }
         
     }
-    recarregarPagina();
-
-    /*
-    const ulPedidos = document.querySelector(".imagem-autor-pedido");
-    ulPedidos.innerHTML += 
-            `
-            <li class="pedido" onclick="dadosDoPedido(this,${pedido.id})">
-                <img src="${pedido.image}" />
-                <span class="criador" >Criador: ${pedido.owner}</span>
-            </li>
-            `
-
-    */
 
     promise.then(encomendarModeloExistente);
     promise.catch((erro) => console.log("Está dando erro"));

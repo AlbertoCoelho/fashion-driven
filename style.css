@@ -215,6 +215,8 @@ footer {
 
     background-color: #FFFFFF;
     margin-bottom: 20px;
+
+    cursor:pointer;
 }
 
 .pedido img {
@@ -226,10 +228,14 @@ footer {
     padding-top: 10px;;
 }
 
-.ativo {
+.confirmar{
     background-color: #404EED;
 }
 
 .criador {
     word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
 }
